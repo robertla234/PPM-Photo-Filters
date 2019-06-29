@@ -1,0 +1,225 @@
+Script started on Sun 25 Nov 2018 03:54:32 PM PST
+]0;rla2@zuma:~/hw4[rla2@zuma ~/hw4]$ make
+gcc -ansi -std=c99 -g -Wall -c Image.c -o Image.o
+gcc -ansi -std=c99 -g -Wall -c -DNDEBUG PhotoLab_v4.c -o PhotoLab.o
+gcc -ansi -std=c99 -g -Wall -c FileIO.c -o FileIO.o
+gcc -ansi -std=c99 -g -Wall -c  DIPs.c -o DIPs.o
+gcc -ansi -std=c99 -g -Wall -c Advanced.c -o Advanced.o
+ar rc libFilter.a Advanced.o DIPs.o
+ranlib libFilter.a
+gcc -ansi -std=c99 -g -Wall -lm PhotoLab.o FileIO.o Image.o -L. -lFilter -o PhotoLab
+gcc -ansi -std=c99 -g -Wall -c -DDEBUG -c PhotoLab_v4.c -o PhotoLab_DEBUG.o
+gcc -ansi -std=c99 -g -Wall -c Test.c -o Test.o
+gcc -ansi -std=c99 -g -Wall -lm PhotoLab_DEBUG.o Test.o FileIO.o Image.o -L. -lFilter -o PhotoLabTest
+]0;rla2@zuma:~/hw4[rla2@zuma ~/hw4]$ ./P
+PhotoLab*     PhotoLabTest* 
+]0;rla2@zuma:~/hw4[rla2@zuma ~/hw4]$ ./PhotoLab
+
+----------------------------
+ 1: Load a PPM image
+ 2: Save an image in PPM and JPEG format
+ 3: Change a color image to Black & White
+ 4: Sketch the edge of an image
+ 5: Shuffle an image
+ 6: Adjust the brightness of an image
+ 7: Mirror an image horizontally
+ 8: Adjust the hue of an image
+ 9: Rotate or flip the image
+ 10: Resize the image
+ 11: Saturate the image
+ 12: Test all functions
+ 13: Exit
+Please make your choice: 12
+HSSOE.ppm was read.
+bw.ppm was saved. 
+bw.jpg was stored.
+Black & White tested!
+
+HSSOE.ppm was read.
+edge.ppm was saved. 
+edge.jpg was stored.
+Edge Detection tested!
+
+HSSOE.ppm was read.
+shuffle.ppm was saved. 
+shuffle.jpg was stored.
+Shuffle tested!
+
+HSSOE.ppm was read.
+brightness.ppm was saved. 
+brightness.jpg was stored.
+Brightness tested!
+
+HSSOE.ppm was read.
+hmirror.ppm was saved. 
+hmirror.jpg was stored.
+HMirror tested!
+
+HSSOE.ppm was read.
+hue.ppm was saved. 
+hue.jpg was stored.
+HueRotate tested!
+
+HSSOE.ppm was read.
+rotate.ppm was saved. 
+rotate.jpg was stored.
+Rotate tested!
+
+HSSOE.ppm was read.
+smallresize.ppm was saved. 
+smallresize.jpg was stored.
+HSSOE.ppm was read.
+bigresize.ppm was saved. 
+bigresize.jpg was stored.
+Resize tested!
+
+HSSOE.ppm was read.
+saturate.ppm was saved. 
+saturate.jpg was stored.
+Saturate tested!
+
+
+----------------------------
+ 1: Load a PPM image
+ 2: Save an image in PPM and JPEG format
+ 3: Change a color image to Black & White
+ 4: Sketch the edge of an image
+ 5: Shuffle an image
+ 6: Adjust the brightness of an image
+ 7: Mirror an image horizontally
+ 8: Adjust the hue of an image
+ 9: Rotate or flip the image
+ 10: Resize the image
+ 11: Saturate the image
+ 12: Test all functions
+ 13: Exit
+Please make your choice: 13
+Segmentation fault (core dumped)
+]0;rla2@zuma:~/hw4[rla2@zuma ~/hw4]$ valgrind --leak-check=full Phoo[KtoLabTest
+valgrind: PhotoLabTest: command not found
+]0;rla2@zuma:~/hw4[rla2@zuma ~/hw4]$ valgrind --leak-check=full PhotoLabTest[1@.[1@/
+==25330== Memcheck, a memory error detector
+==25330== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.
+==25330== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==25330== Command: ./PhotoLabTest
+==25330== 
+HSSOE.ppm was read.
+bw.ppm was saved. 
+bw.jpg was stored.
+HSSOE.ppm was read.
+edge.ppm was saved. 
+edge.jpg was stored.
+HSSOE.ppm was read.
+shuffle.ppm was saved. 
+shuffle.jpg was stored.
+HSSOE.ppm was read.
+brightness.ppm was saved. 
+brightness.jpg was stored.
+HSSOE.ppm was read.
+hmirror.ppm was saved. 
+hmirror.jpg was stored.
+HSSOE.ppm was read.
+hue.ppm was saved. 
+hue.jpg was stored.
+HSSOE.ppm was read.
+rotate.ppm was saved. 
+rotate.jpg was stored.
+HSSOE.ppm was read.
+hflip.ppm was saved. 
+hflip.jpg was stored.
+HSSOE.ppm was read.
+smallresize.ppm was saved. 
+smallresize.jpg was stored.
+HSSOE.ppm was read.
+==25330== Syscall param write(buf) points to uninitialised byte(s)
+==25330==    at 0x32D3ADB850: __write_nocancel (syscall-template.S:82)
+==25330==    by 0x32D3A719B2: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1268)
+==25330==    by 0x32D3A72F64: _IO_do_write@@GLIBC_2.2.5 (fileops.c:522)
+==25330==    by 0x32D3A72362: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:876)
+==25330==    by 0x32D3A6E686: fputc (fputc.c:39)
+==25330==    by 0x401617: SaveImage (FileIO.c:90)
+==25330==    by 0x401111: AutoTest (Test.c:129)
+==25330==    by 0x400B8E: main (PhotoLab_v4.c:42)
+==25330==  Address 0x4c0ec01 is not stack'd, malloc'd or (recently) free'd
+==25330== 
+==25330== Syscall param write(buf) points to uninitialised byte(s)
+==25330==    at 0x32D3ADB850: __write_nocancel (syscall-template.S:82)
+==25330==    by 0x32D3A719B2: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1268)
+==25330==    by 0x32D3A72F64: _IO_do_write@@GLIBC_2.2.5 (fileops.c:522)
+==25330==    by 0x32D3A7273F: _IO_file_close_it@@GLIBC_2.2.5 (fileops.c:169)
+==25330==    by 0x32D3A663D7: fclose@@GLIBC_2.2.5 (iofclose.c:62)
+==25330==    by 0x4016D3: SaveImage (FileIO.c:99)
+==25330==    by 0x401111: AutoTest (Test.c:129)
+==25330==    by 0x400B8E: main (PhotoLab_v4.c:42)
+==25330==  Address 0x4c0e0ed is not stack'd, malloc'd or (recently) free'd
+==25330== 
+bigresize.ppm was saved. 
+bigresize.jpg was stored.
+HSSOE.ppm was read.
+saturate.ppm was saved. 
+saturate.jpg was stored.
+==25330== 
+==25330== HEAP SUMMARY:
+==25330==     in use at exit: 18,240,136 bytes in 19 blocks
+==25330==   total heap usage: 89 allocs, 70 frees, 27,793,016 bytes allocated
+==25330== 
+==25330== 8 bytes in 1 blocks are definitely lost in loss record 1 of 19
+==25330==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==25330==    by 0x400B85: main (PhotoLab_v4.c:40)
+==25330== 
+==25330== 720,032 (32 direct, 720,000 indirect) bytes in 1 blocks are definitely lost in loss record 14 of 19
+==25330==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==25330==    by 0x40178F: CreateImage (Image.c:16)
+==25330==    by 0x401301: LoadImage (FileIO.c:39)
+==25330==    by 0x400F4E: AutoTest (Test.c:89)
+==25330==    by 0x400B8E: main (PhotoLab_v4.c:42)
+==25330== 
+==25330== 720,032 (32 direct, 720,000 indirect) bytes in 1 blocks are definitely lost in loss record 15 of 19
+==25330==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==25330==    by 0x40178F: CreateImage (Image.c:16)
+==25330==    by 0x401301: LoadImage (FileIO.c:39)
+==25330==    by 0x400FCB: AutoTest (Test.c:101)
+==25330==    by 0x400B8E: main (PhotoLab_v4.c:42)
+==25330== 
+==25330== 720,032 (32 direct, 720,000 indirect) bytes in 1 blocks are definitely lost in loss record 16 of 19
+==25330==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==25330==    by 0x40178F: CreateImage (Image.c:16)
+==25330==    by 0x401301: LoadImage (FileIO.c:39)
+==25330==    by 0x401048: AutoTest (Test.c:116)
+==25330==    by 0x400B8E: main (PhotoLab_v4.c:42)
+==25330== 
+==25330== 720,032 (32 direct, 720,000 indirect) bytes in 1 blocks are definitely lost in loss record 17 of 19
+==25330==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==25330==    by 0x40178F: CreateImage (Image.c:16)
+==25330==    by 0x401301: LoadImage (FileIO.c:39)
+==25330==    by 0x4010C5: AutoTest (Test.c:125)
+==25330==    by 0x400B8E: main (PhotoLab_v4.c:42)
+==25330== 
+==25330== 7,680,000 bytes in 1 blocks are possibly lost in loss record 18 of 19
+==25330==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==25330==    by 0x4021F6: Rotate (Advanced.c:152)
+==25330==    by 0x400F74: AutoTest (Test.c:91)
+==25330==    by 0x400B8E: main (PhotoLab_v4.c:42)
+==25330== 
+==25330== 7,680,000 bytes in 1 blocks are definitely lost in loss record 19 of 19
+==25330==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==25330==    by 0x4021F6: Rotate (Advanced.c:152)
+==25330==    by 0x400FF1: AutoTest (Test.c:103)
+==25330==    by 0x400B8E: main (PhotoLab_v4.c:42)
+==25330== 
+==25330== LEAK SUMMARY:
+==25330==    definitely lost: 7,680,136 bytes in 6 blocks
+==25330==    indirectly lost: 2,880,000 bytes in 12 blocks
+==25330==      possibly lost: 7,680,000 bytes in 1 blocks
+==25330==    still reachable: 0 bytes in 0 blocks
+==25330==         suppressed: 0 bytes in 0 blocks
+==25330== 
+==25330== For counts of detected and suppressed errors, rerun with: -v
+==25330== Use --track-origins=yes to see where uninitialised values come from
+==25330== ERROR SUMMARY: 39 errors from 9 contexts (suppressed: 8 from 6)
+]0;rla2@zuma:~/hw4[rla2@zuma ~/hw4]$ make clean
+rm -f *.o *.jpg PhotoLab PhotoLabTest bw.ppm edge.ppm shuffle.ppm brightness.ppm hmirror.ppm hue.ppm bigresize.ppm smallresize.ppm hflip.ppm rotate.ppm saturate.ppm  libFilter.a
+]0;rla2@zuma:~/hw4[rla2@zuma ~/hw4]$ exit
+exit
+
+Script done on Sun 25 Nov 2018 03:55:46 PM PST

@@ -1,0 +1,36 @@
+EECS 22 Assignment 4
+Robert La 20873000
+QV Dang
+PhotoLab.txt
+
+In this assignment, we were instructed to convert our previous PhotoLab
+assignment from one using arrays to one using structures and pointers. Then,
+we were required to add three more filters: Resize, Rotate, and Saturate. 
+
+Converting the old PhotoLab assignment was difficult to say the least. I 
+created my Image.h and Image.c files and used the hw3_sol/ copied files as 
+a base. I included all the function declarations from the assignment 
+slides to change all the .h files. I had to review old lecture slides, refer
+to assignment slides, and even Google some information on how to properly
+point to a strucutre and its elements. The use of IMAGE *image was so
+confusing to begin with. After I figured out how to properly set up both
+Image and my FileIO.c files, setting up and replacing the arrays with 
+pointers through the DIPs and Advanced functions was easy. Even changing
+the temporary arrays in the former functions to new structures cause me
+some issue. 
+
+Creating the Resize, Rotate, and Saturate were relatively easy. The 
+calculations and formulas for each were included in the assignment slides
+so that was easy to follow. One issue is in the Resize. MY SMALL RESIZE
+IS BLURRY FROM THE AVERAGE AND MY BIG RESIZE IS FUZZY FROM TRYING TO
+DUPLICATE PIXELS. I cannot seem to remedy this so I left it in the 
+code. My 500 resize for the big resize is also spotty. Other than that,
+the filters seem to work well.
+
+The Valgrind feature is confusing. I was and am unsure how to change my
+code in order to fix the errors. I used "valgrind ./PhotoLab" to narrow
+down that the errors stem from only the new filters. The old filters
+show no errors. I am unsure how to fix the new filters to be in line
+with what Valgrind wants.
+
+Overall, this lab was difficult and I have left it somwhat unfinished.
